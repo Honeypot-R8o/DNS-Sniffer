@@ -32,7 +32,7 @@ def packetSniffer(pkt):
 def dnsSniffer():
 	global intf
 	ni.ifaddresses(intf)
-	localIP = ni.ifaddresses(intf)[ni.AF_INET][0]['addr']
+	#localIP = ni.ifaddresses(intf)[ni.AF_INET][0]['addr']
 	#filterstr="udp and src port 53 and (host not " + localIP + ")"
 	filterstr="udp and src port 53"
 	sniff(filter=filterstr, iface=intf, store=0, prn=packetSniffer)
