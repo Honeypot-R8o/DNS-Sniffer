@@ -16,7 +16,7 @@ dhcpname={}
 def startscreen():
 	print('\033c')
 	print("****************************************")
-	print("* DNS-Sniffer  V.1.0 by Reto Schaedler *")
+	print("* DNS-Sniffer  V.1.1 by Reto Schaedler *")
 	print("****************************************")
 	print()
 
@@ -26,7 +26,10 @@ def packetSniffer(pkt):
 	global iplist
 	if pkt.haslayer(DNSQR):
 		dnslist.append(str(pkt[DNS].qd.qname)[2:-2])
-		iplist.append(str(pkt[IP].dst))
+		if IPv6 in pkt:
+			iplist.append(str(pkt[IPv6].dst))
+		else:
+			iplist.append(str(pkt[IP].dst))
 
 
 def dnsSniffer():
